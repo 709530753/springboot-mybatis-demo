@@ -1,0 +1,12 @@
+CREATE DATABASE data_item;
+
+CREATE TABLE service_active_item(
+  item_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  activeId VARCHAR(255),
+  activeCode VARCHAR(255),
+  activeName VARCHAR(255),
+  activeComment VARCHAR(255),
+  woCode VARCHAR(255),
+  status VARCHAR(255),
+  opId VARCHAR(255),
+) ENGINE=INNODB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;

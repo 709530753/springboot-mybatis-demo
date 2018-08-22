@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myxc.mapper.ServiceActiveItemMapper" >
+  <resultMap id="BaseResultMap" type="com.myxc.model.ServiceActiveItem" >
+    <id column="item_id" property="itemId" jdbcType="INTEGER" />
+    <result column="activeId" property="activeId" jdbcType="VARCHAR" />
+    <result column="activeCode" property="activeCode" jdbcType="VARCHAR" />
+    <result column="activeName" property="activeName" jdbcType="VARCHAR" />
+    <result column="activeComment" property="activeComment" jdbcType="VARCHAR" />
+    <result column="woCode" property="woCode" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="opId" property="opId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    item_id, activeId, activeCode, activeName, activeComment, woCode, status, opId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from service_active_item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllItems" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from service_active_item
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from service_active_item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myxc.model.ServiceActiveItem" >
+    insert into service_active_item (item_id, activeId, activeCode, 
+      activeName, activeComment, woCode, 
+      status, opId)
+    values (#{itemId,jdbcType=INTEGER}, #{activeId,jdbcType=VARCHAR}, #{activeCode,jdbcType=VARCHAR},
+      #{activeName,jdbcType=VARCHAR}, #{activeComment,jdbcType=VARCHAR}, #{woCode,jdbcType=VARCHAR},
+      #{status,jdbcType=VARCHAR}, #{opId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myxc.model.ServiceActiveItem" >
+    insert into service_active_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="activeId != null" >
+        activeId,
+      </if>
+      <if test="activeCode != null" >
+        activeCode,
+      </if>
+      <if test="activeName != null" >
+        activeName,
+      </if>
+      <if test="activeComment != null" >
+        activeComment,
+      </if>
+      <if test="woCode != null" >
+        woCode,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="opid != null" >
+        opId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="activeId != null" >
+        #{activeId,jdbcType=VARCHAR},
+      </if>
+      <if test="activeCode != null" >
+        #{activeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="activeName != null" >
+        #{activeName,jdbcType=VARCHAR},
+      </if>
+      <if test="activeComment != null" >
+        #{activeComment,jdbcType=VARCHAR},
+      </if>
+      <if test="woCode != null" >
+        #{woCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null" >
+        #{opId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myxc.model.ServiceActiveItem" >
+    update service_active_item
+    <set >
+      <if test="activeId != null" >
+        activeId = #{activeId,jdbcType=VARCHAR},
+      </if>
+      <if test="activeCode != null" >
+        activeCode = #{activeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="activeName != null" >
+        activeName = #{activeName,jdbcType=VARCHAR},
+      </if>
+      <if test="activeComment != null" >
+        activeComment = #{activeComment,jdbcType=VARCHAR},
+      </if>
+      <if test="woCode != null" >
+        woCode = #{woCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null" >
+        opId = #{opId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myxc.model.ServiceActiveItem" >
+    update service_active_item
+    set activeId = #{activeId,jdbcType=VARCHAR},
+      activeCode = #{activeCode,jdbcType=VARCHAR},
+      activeName = #{activeName,jdbcType=VARCHAR},
+      activeComment = #{activeComment,jdbcType=VARCHAR},
+      woCode = #{woCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      opId = #{opId,jdbcType=VARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myxc.mapper.ItemDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.myxc.model.ItemDetail" >
+    <id column="item_id" property="itemId" jdbcType="INTEGER" />
+    <result column="beforePicUrl" property="beforePicUrl" jdbcType="VARCHAR" />
+    <result column="afterPicUrl" property="afterPicUrl" jdbcType="VARCHAR" />
+    <result column="otherPicUrl" property="otherPicUrl" jdbcType="VARCHAR" />
+    <result column="repairItemName" property="repairItemName" jdbcType="VARCHAR" />
+    <result column="userFeedBack" property="userFeedBack" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    item_id, beforePicUrl, afterPicUrl, otherPicUrl, repairItemName, userFeedBack
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from item_detail
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from item_detail
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myxc.model.ItemDetail" >
+    insert into item_detail (item_id, beforePicUrl, afterPicUrl, 
+      otherPicUrl, repairItemName, userFeedBack
+      )
+    values (#{itemId,jdbcType=INTEGER}, #{beforePicUrl,jdbcType=VARCHAR}, #{afterPicUrl,jdbcType=VARCHAR},
+      #{otherPicUrl,jdbcType=VARCHAR}, #{repairItemName,jdbcType=VARCHAR}, #{userFeedBack,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myxc.model.ItemDetail" >
+    insert into item_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="beforePicUrl != null" >
+        beforePicUrl,
+      </if>
+      <if test="afterPicUrl != null" >
+        afterPicUrl,
+      </if>
+      <if test="otherPicUrl != null" >
+        otherPicUrl,
+      </if>
+      <if test="repairItemName != null" >
+        repairItemName,
+      </if>
+      <if test="userFeedBack != null" >
+        userFeedBack,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="beforePicUrl != null" >
+        #{beforePicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="afterPicUrl != null" >
+        #{afterPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="otherPicUrl != null" >
+        #{otherPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="repairItemName != null" >
+        #{repairItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="userFeedBack != null" >
+        #{userFeedBack,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myxc.model.ItemDetail" >
+    update item_detail
+    <set >
+      <if test="beforePicUrl != null" >
+        beforePicUrl = #{beforePicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="afterPicUrl != null" >
+        afterPicUrl = #{afterPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="otherPicUrl != null" >
+        otherPicUrl = #{otherPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="repairItemName != null" >
+        repairItemName = #{repairItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="userFeedBack != null" >
+        userFeedBack = #{userFeedBack,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myxc.model.ItemDetail" >
+    update item_detail
+    set beforePicUrl = #{beforepicurl,jdbcType=VARCHAR},
+      afterPicUrl = #{afterpicurl,jdbcType=VARCHAR},
+      otherPicUrl = #{otherpicurl,jdbcType=VARCHAR},
+      repairItemName = #{repairitemname,jdbcType=VARCHAR},
+      userFeedBack = #{userfeedback,jdbcType=VARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+</mapper>
