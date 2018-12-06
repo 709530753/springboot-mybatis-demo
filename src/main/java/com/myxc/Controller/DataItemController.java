@@ -6,6 +6,8 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,8 +21,9 @@ public class DataItemController {
     DataItemService dataItemService;
 
     @RequestMapping("/serverstation/queryMaintenanceItem")
-    public String queryMaintenanceItem() {
+    public String queryMaintenanceItem(HttpServletResponse response) {
 
+        response.setHeader("Access-Control-Allow-Origin", "*");
         List<DataItem> dataItems = dataItemService.selectAllDataItem();
 
         HashMap<String,Object> hashMap = new HashMap<>();

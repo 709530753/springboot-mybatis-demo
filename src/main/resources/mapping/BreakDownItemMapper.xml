@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myxc.mapper.BreakDownItemMapper" >
+  <resultMap id="BaseResultMap" type="com.myxc.model.BreakDownItem" >
+    <id column="spn_id" property="spnId" jdbcType="INTEGER" />
+    <result column="spn" property="spn" jdbcType="VARCHAR" />
+    <result column="fmi" property="fmi" jdbcType="VARCHAR" />
+    <result column="faultMesg" property="faultMesg" jdbcType="VARCHAR" />
+    <result column="faultTime" property="faultTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    spn_id, spn, fmi, faultMesg, faultTime
+  </sql>
+
+  <select id="selectAllDataItem" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from breakdown
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from breakdown
+    where spn_id = #{spnId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from breakdown
+    where spn_id = #{spnId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myxc.model.BreakDownItem" >
+    insert into breakdown (spn_id, spn, fmi, 
+      faultMesg, faultTime)
+    values (#{spnId,jdbcType=INTEGER}, #{spn,jdbcType=VARCHAR}, #{fmi,jdbcType=VARCHAR}, 
+      #{faultmesg,jdbcType=VARCHAR}, #{faulttime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myxc.model.BreakDownItem" >
+    insert into breakdown
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="spnId != null" >
+        spn_id,
+      </if>
+      <if test="spn != null" >
+        spn,
+      </if>
+      <if test="fmi != null" >
+        fmi,
+      </if>
+      <if test="faultmesg != null" >
+        faultMesg,
+      </if>
+      <if test="faulttime != null" >
+        faultTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="spnId != null" >
+        #{spnId,jdbcType=INTEGER},
+      </if>
+      <if test="spn != null" >
+        #{spn,jdbcType=VARCHAR},
+      </if>
+      <if test="fmi != null" >
+        #{fmi,jdbcType=VARCHAR},
+      </if>
+      <if test="faultmesg != null" >
+        #{faultmesg,jdbcType=VARCHAR},
+      </if>
+      <if test="faulttime != null" >
+        #{faulttime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myxc.model.BreakDownItem" >
+    update breakdown
+    <set >
+      <if test="spn != null" >
+        spn = #{spn,jdbcType=VARCHAR},
+      </if>
+      <if test="fmi != null" >
+        fmi = #{fmi,jdbcType=VARCHAR},
+      </if>
+      <if test="faultmesg != null" >
+        faultMesg = #{faultmesg,jdbcType=VARCHAR},
+      </if>
+      <if test="faulttime != null" >
+        faultTime = #{faulttime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where spn_id = #{spnId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myxc.model.BreakDownItem" >
+    update breakdown
+    set spn = #{spn,jdbcType=VARCHAR},
+      fmi = #{fmi,jdbcType=VARCHAR},
+      faultMesg = #{faultmesg,jdbcType=VARCHAR},
+      faultTime = #{faulttime,jdbcType=VARCHAR}
+    where spn_id = #{spnId,jdbcType=INTEGER}
+  </update>
+</mapper>
